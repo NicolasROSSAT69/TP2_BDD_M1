@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Td2BddM1", "Td2BddM1\Td2BddM1.csproj", "{A6777180-A1AB-4120-AC5D-09146035B1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTd2BddM1", "SpecFlowTd2BddM1\SpecFlowTd2BddM1.csproj", "{F1E18CA4-1F26-4D06-869F-25DBA40B49C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6777180-A1AB-4120-AC5D-09146035B1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6777180-A1AB-4120-AC5D-09146035B1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6777180-A1AB-4120-AC5D-09146035B1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6777180-A1AB-4120-AC5D-09146035B1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E18CA4-1F26-4D06-869F-25DBA40B49C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E18CA4-1F26-4D06-869F-25DBA40B49C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E18CA4-1F26-4D06-869F-25DBA40B49C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E18CA4-1F26-4D06-869F-25DBA40B49C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

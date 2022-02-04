@@ -40,7 +40,7 @@ namespace SpecFlowTd2BddM1.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Scrutin", "\tSimple calculator for adding two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Scrutin", "\tapi for result of scrutin majoritaire", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,17 +80,19 @@ namespace SpecFlowTd2BddM1.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Show number of votes")]
         [Xunit.TraitAttribute("FeatureTitle", "Scrutin")]
-        [Xunit.TraitAttribute("Description", "Add two numbers")]
-        [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void AddTwoNumbers()
+        [Xunit.TraitAttribute("Description", "Show number of votes")]
+        [Xunit.InlineDataAttribute("true", "Nombre de vote: ROSSAT : 150,Mars : 112,Rue : 38,", new string[0])]
+        [Xunit.InlineDataAttribute("false", "Le scrutin n\'est pas cloturé", new string[0])]
+        public virtual void ShowNumberOfVotes(string etatscrutin, string result, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+            argumentsOfScenario.Add("etatscrutin", etatscrutin);
+            argumentsOfScenario.Add("result", result);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show number of votes", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -110,17 +112,140 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 5
+ testRunner.Given(string.Format("The state of the ballot is {0}", etatscrutin), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
 #line 6
- testRunner.Given("the first number is 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When("the number of votes is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.And("the second number is 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then(string.Format("the result should be {0}", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 8
- testRunner.When("the two numbers are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableTheoryAttribute(DisplayName="Show vote percentage")]
+        [Xunit.TraitAttribute("FeatureTitle", "Scrutin")]
+        [Xunit.TraitAttribute("Description", "Show vote percentage")]
+        [Xunit.InlineDataAttribute("true", "300", "Pourcentage de vote: ROSSAT : 50,Mars : 37,Rue : 12,", new string[0])]
+        [Xunit.InlineDataAttribute("false", "300", "Le scrutin n\'est pas cloturé", new string[0])]
+        public virtual void ShowVotePercentage(string etatscrutin, string totalvote, string result, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("etatscrutin", etatscrutin);
+            argumentsOfScenario.Add("totalvote", totalvote);
+            argumentsOfScenario.Add("result", result);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show vote percentage", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 13
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
-#line 9
- testRunner.Then("the result should be 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 14
+ testRunner.Given(string.Format("The state of the ballot is {0}", etatscrutin), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 15
+ testRunner.And(string.Format("The total number of votes of ballots is {0}", totalvote), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 16
+ testRunner.When("the vote percentage is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 17
+ testRunner.Then(string.Format("the result should be {0}", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableTheoryAttribute(DisplayName="Obtain winner")]
+        [Xunit.TraitAttribute("FeatureTitle", "Scrutin")]
+        [Xunit.TraitAttribute("Description", "Obtain winner")]
+        [Xunit.TraitAttribute("Category", "mytag")]
+        [Xunit.InlineDataAttribute("200", "101", "50", "49", "1", "true", "ROSSAT", new string[0])]
+        [Xunit.InlineDataAttribute("200", "10", "10", "180", "1", "true", "Rue", new string[0])]
+        [Xunit.InlineDataAttribute("300", "120", "75", "105", "1", "false", "Le scrutin n\'est pas cloturé", new string[0])]
+        [Xunit.InlineDataAttribute("300", "120", "75", "105", "1", "true", "Refaire un tour de scrutin avec ces deux candidat : ROSSAT et Rue", new string[0])]
+        [Xunit.InlineDataAttribute("300", "150", "150", "0", "2", "true", "Pas de vainqueur", new string[0])]
+        [Xunit.InlineDataAttribute("300", "155", "145", "0", "2", "true", "ROSSAT", new string[0])]
+        [Xunit.InlineDataAttribute("300", "155", "145", "0", "2", "false", "Le scrutin n\'est pas cloturé", new string[0])]
+        public virtual void ObtainWinner(string totalvote, string votecandidat1, string votecandidat2, string votecandidat3, string nombretour, string etatscrutin, string result, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "mytag"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("totalvote", totalvote);
+            argumentsOfScenario.Add("votecandidat1", votecandidat1);
+            argumentsOfScenario.Add("votecandidat2", votecandidat2);
+            argumentsOfScenario.Add("votecandidat3", votecandidat3);
+            argumentsOfScenario.Add("nombretour", nombretour);
+            argumentsOfScenario.Add("etatscrutin", etatscrutin);
+            argumentsOfScenario.Add("result", result);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Obtain winner", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 24
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 25
+ testRunner.Given(string.Format("The total number of votes of ballots is {0}", totalvote), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 26
+ testRunner.And(string.Format("The number of votes for the first candidate is {0}", votecandidat1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 27
+ testRunner.And(string.Format("The number of votes for the second candidate is {0}", votecandidat2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 28
+ testRunner.And(string.Format("The number of votes for the third candidate is {0}", votecandidat3), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 29
+ testRunner.And(string.Format("The number of ballots is {0}", nombretour), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.And(string.Format("The state of the ballot is {0}", etatscrutin), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 31
+ testRunner.When("the winner is obtained", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
+ testRunner.Then(string.Format("the result should be {0}", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
